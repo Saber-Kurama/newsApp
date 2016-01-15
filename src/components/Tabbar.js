@@ -16,6 +16,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // login 组件
 import Login from '../containers/Login';
+// 首页组件
+import Home from '../containers/Home';
+import Phone from '../containers/Phone';
 import Profile from '../containers/Profile';
 
 const { Component, StyleSheet, View, Text } = React;
@@ -47,6 +50,26 @@ class Tabbar extends Component {
               renderIcon={() => <Icon name="home" size={30} color="#FFB3B3" />}
               renderSelectedIcon={() => <Icon name="home" size={30} color="#FF3366" />}
               onPress = {() => this.setState({selectedTab: 'home'})} >
+            <View style={styles.container}>
+              <Home />
+            </View>
+          </TabNavigator.Item>
+          <TabNavigator.Item 
+              selected = {this.state.selectedTab === 'customer'}
+              title='客户'
+              renderIcon={() => <Icon name="users" size={30} color="#ffb3b3" /> }
+              renderSelectedIcon={() => <Icon name="users" size={30} color="#ff3366"/>}
+              onPress={() => this.setState({selectedTab: 'customer'})}>
+            <View style={styles.container}>
+              <Phone />
+            </View>
+          </TabNavigator.Item>
+          <TabNavigator.Item
+              selected = {this.state.selectedTab === 'training'}
+              title='培训'
+              renderIcon={() => <Icon name="graduation-cap" size={30} color="#ffb3b3" /> }
+              renderSelectedIcon={() => <Icon name="graduation-cap" size={30} color="#ff3366"/>}
+              onPress={() => this.setState({selectedTab: 'training'})}>
             <View style={styles.container}>
               <Login />
             </View>
