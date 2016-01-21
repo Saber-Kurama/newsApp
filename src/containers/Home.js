@@ -7,9 +7,35 @@
  * Created by saber on 16/1/14.
  */
 import React from 'react-native';
-import Swiper from 'react-native-swiper';
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux/native';
+import { Map } from 'immutable';
+import Swiper from '../components/ReactNativeSwiper';
 import Grid from '../components/Grid';
-const { Component, View, Text, StyleSheet, Image } = React;
+import News from './News';
+import Login from './Login';
+import * as authActions from '../reducers/auth/authActions';
+const { Component, View, Text, StyleSheet, Image, TouchableOpacity } = React;
+const actions = [
+  authActions
+];
+// 默认数据  (后面使用es7的装饰)
+let mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+let mapDispatchToProps = (dispatch) => {
+  const creators = Map()
+    .merge(...actions)
+    .filter(value => typeof value === 'function')
+    .toObject();
+  return {
+    actions: bindActionCreators(creators, dispatch),
+    dispatch
+  };
+};
 const mockData = [
   {
     name: '行业快讯',
@@ -60,17 +86,34 @@ class Home extends Component {
     return mockData.map(item => {
       return (
         <View>
+          <TouchableOpacity onPress={this.gonews.bind(this)}>
           <Image source={item.icon}>
             { item.badge && (<View style={styles.badge}/>) }
           </Image>
           <Text style={{marginTop: 10}}>
             {item.name}
           </Text>
+          </TouchableOpacity>
         </View>
       );
     });
   }
 
+  gonews() {
+    
+    const { navigator, actions } = this.props;
+    //或者写成 const navigator = this.props.navigator;
+    //为什么这里可以取得 props.navigator?请看上文:
+    //<Component {...route.params} navigator={navigator} />
+    //这里传递了navigator作为props
+    if(navigator) {
+      actions.getSessionToken();
+      navigator.push({
+        name: 'SecondPageComponent',
+        component: News
+      });
+    }
+  }
   // 渲染
   render() {
     return (
@@ -83,9 +126,11 @@ class Home extends Component {
               bottom: 10,
             }}
                 loop={true} autoplay={true}>
-          <View style={styles.slide}>
+          <View style={styles.slide}  >
+            
             <Image style={styles.image}
                    source={{uri: 'http://c.hiphotos.baidu.com/image/w%3D310/sign=0dff10a81c30e924cfa49a307c096e66/7acb0a46f21fbe096194ceb468600c338644ad43.jpg'}}/>
+            
           </View>
           <View style={styles.slide}>
             <Image style={styles.image}
@@ -151,4 +196,5 @@ var styles = StyleSheet.create({
   },
   button: {flex: 1, marginBottom: 0, borderWidth: 0}
 })
-export default Home;
+//export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

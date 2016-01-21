@@ -4,13 +4,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
- * Created by saber on 16/1/3.
+ * Created by saber on 16/1/19.
  */
-import KeyMirror from 'key-mirror';
+'use strict';
 
-export default KeyMirror({
-  HAS_TABBAR: null,
-  SESSION_TOKEN_REQUEST: null,
-
-  LOGIN_STATE_LOGIN: null
-});
+const {
+  HAS_TABBAR
+  } = require('../../lib/constants').default;
+//一个 用户的 reducer
+export default function appReducer(state = {}, action){ 
+  switch (action.type){
+  case HAS_TABBAR:
+    let nextState = state.setIn(['form', 'isFetching'], true)
+      .setIn(['form', 'error'], null);
+    return nextState;
+  }
+  return state;
+}

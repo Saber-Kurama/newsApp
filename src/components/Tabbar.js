@@ -21,7 +21,7 @@ import Home from '../containers/Home';
 import Phone from '../containers/Phone';
 import Profile from '../containers/Profile';
 
-const { Component, StyleSheet, View, Text } = React;
+const { Component, StyleSheet, View, Text, Navigator } = React;
 class Tabbar extends Component {
   // 默认属性
   static defaultProps = {};
@@ -42,8 +42,11 @@ class Tabbar extends Component {
 
   // 渲染
   render() {
+    console.log('>>>>>');
+    let tabBarHeight = this.props.tabBarHeight;
     return (
-        <TabNavigator>
+        <TabNavigator tabBarStyle={{ height: tabBarHeight, overflow: 'hidden' }}
+                      sceneStyle={{ paddingBottom: tabBarHeight }}>
           <TabNavigator.Item
               selected = {this.state.selectedTab === 'home'}
               title='首页'
@@ -51,7 +54,17 @@ class Tabbar extends Component {
               renderSelectedIcon={() => <Icon name="home" size={30} color="#FF3366" />}
               onPress = {() => this.setState({selectedTab: 'home'})} >
             <View style={styles.container}>
-              <Home />
+              <Navigator 
+                initialRoute={{name: '首页', component: Home}} 
+                
+                renderScene={(route, navigator) => {
+                  let Component = route.component;
+                  if(route.component) {
+                    return <Component {...route.params} navigator={navigator} />
+                  }
+                }}>
+                
+              </Navigator>
             </View>
           </TabNavigator.Item>
           <TabNavigator.Item 

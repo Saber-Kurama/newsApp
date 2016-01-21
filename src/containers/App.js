@@ -59,14 +59,21 @@ class App extends Component {
   componentDidMount() {
     console.log(this.props.actions);
 
-    this.props.actions.getSessionToken();
+    //this.props.actions.getSessionToken();
   }
 
   // 渲染
   render() {
+    console.log('?????');
+    console.log(this.props.auth.get('form').get('isFetching'));
+    let tabBarHeight = 49;
+    if(this.props.auth.get('form').get('isFetching')){
+      console.log('>>>>>SDDS>>SD>D>S');
+      tabBarHeight = 0;
+    }
     let component = <Login />;
     //if(this.state.loggedIn){
-      component = <Tabbar />;
+      component = <Tabbar actions={this.props.actions} tabBarHeight={tabBarHeight}/>;
     //}
     return (
       component

@@ -4,13 +4,5 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
- * Created by saber on 16/1/3.
+ * Created by saber on 16/1/19.
  */
-import KeyMirror from 'key-mirror';
-
-export default KeyMirror({
-  HAS_TABBAR: null,
-  SESSION_TOKEN_REQUEST: null,
-
-  LOGIN_STATE_LOGIN: null
-});
