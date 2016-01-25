@@ -63,8 +63,7 @@ class News extends Component {
     
     const { navigator, actions } = this.props;
     if(navigator){
-      actions.showTabBar();
-      setTimeout(function(){navigator.pop();}, 300);
+      navigator.pop();
     }
   }
 

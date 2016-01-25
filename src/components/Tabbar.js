@@ -54,17 +54,7 @@ class Tabbar extends Component {
               renderSelectedIcon={() => <Icon name="home" size={30} color="#FF3366" />}
               onPress = {() => this.setState({selectedTab: 'home'})} >
             <View style={styles.container}>
-              <Navigator 
-                initialRoute={{name: '首页', component: Home}} 
-                
-                renderScene={(route, navigator) => {
-                  let Component = route.component;
-                  if(route.component) {
-                    return <Component {...route.params} navigator={navigator} />
-                  }
-                }}>
-                
-              </Navigator>
+              <Home navigator={this.props.navigator}/>
             </View>
           </TabNavigator.Item>
           <TabNavigator.Item 
