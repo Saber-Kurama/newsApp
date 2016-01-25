@@ -14,10 +14,10 @@ import Swiper from '../components/ReactNativeSwiper';
 import Grid from '../components/Grid';
 import News from './News';
 import Login from './Login';
-import * as authActions from '../reducers/auth/authActions';
+import * as appActions from '../reducers/app/appActions';
 const { Component, View, Text, StyleSheet, Image, TouchableOpacity } = React;
 const actions = [
-  authActions
+  appActions
 ];
 // 默认数据  (后面使用es7的装饰)
 let mapStateToProps = (state) => {
@@ -107,7 +107,7 @@ class Home extends Component {
     //<Component {...route.params} navigator={navigator} />
     //这里传递了navigator作为props
     if(navigator) {
-      actions.getSessionToken();
+      //actions.hideTabBar();
       navigator.push({
         name: 'SecondPageComponent',
         component: News
@@ -116,6 +116,7 @@ class Home extends Component {
   }
   // 渲染
   render() {
+    console.log('homehomehoemhoe');
     return (
       <View style={{flex: 1}}>
         <Swiper style={styles.wrapper} height={240}

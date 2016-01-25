@@ -7,9 +7,9 @@
  * Created by saber on 16/1/1.
  */
 import { combineReducers } from 'redux';
-import auth from './auth/authReducer';
+import app from './app/appReducer';
 
 const rootReducer = combineReducers({
-  auth
+  app
 });
 export default rootReducer;

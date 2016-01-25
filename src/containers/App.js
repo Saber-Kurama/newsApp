@@ -64,12 +64,10 @@ class App extends Component {
 
   // 渲染
   render() {
-    console.log('?????');
-    console.log(this.props.auth.get('form').get('isFetching'));
-    let tabBarHeight = 49;
-    if(this.props.auth.get('form').get('isFetching')){
+    let tabBarHeight = 0;
+    if(this.props.app.get('showTabBar')){
       console.log('>>>>>SDDS>>SD>D>S');
-      tabBarHeight = 0;
+      tabBarHeight = 49;
     }
     let component = <Login />;
     //if(this.state.loggedIn){

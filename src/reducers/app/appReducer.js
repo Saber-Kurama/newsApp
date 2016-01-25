@@ -8,16 +8,29 @@
  */
 'use strict';
 
+import  InitialState from './appInitialState';
+
 const {
-  HAS_TABBAR
+  SHOW_TABBAR,
+  HIDE_TABBAR
   } = require('../../lib/constants').default;
-//一个 用户的 reducer
-export default function appReducer(state = {}, action){ 
-  switch (action.type){
-  case HAS_TABBAR:
-    let nextState = state.setIn(['form', 'isFetching'], true)
-      .setIn(['form', 'error'], null);
+
+ const initialState = new InitialState;
+
+//修改 app的数据
+export default function appReducer(state = initialState, action){ 
+  switch (action.type) {
+  case SHOW_TABBAR:
+  {
+    let nextState = state.set('showTabBar', true);
     return nextState;
+  }
+  case HIDE_TABBAR:
+  {
+    console.log('???>>>>>>>');
+    let nextState = state.set('showTabBar', false);
+    return nextState;
+  }
   }
   return state;
 }

@@ -4,17 +4,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
- * Created by saber on 16/1/3.
+ * Created by saber on 16/1/25.
+ * 定义初始化数据,数据结构以及数据默认值
  */
-import KeyMirror from 'key-mirror';
+import {Record} from 'immutable';
 
-export default KeyMirror({
-  
-  SHOW_TABBAR: null,
-  HIDE_TABBAR: null,
-  
-  HAS_TABBAR: null,
-  SESSION_TOKEN_REQUEST: null,
-
-  LOGIN_STATE_LOGIN: null
+// app 的数据 也就是全局数据
+let InitialState = Record({
+  showTabBar: true 
 });
+
+export default InitialState;

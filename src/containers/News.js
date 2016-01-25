@@ -7,11 +7,43 @@
  * Created by saber on 16/1/15.
  */
 import React from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux/native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import CustomTabBar from '../components/CustomTabBar';
 import FacebookTabBar from '../components/FacebookTabBar';
 import NaviBar from '../components/NaviBar';
+
+import * as appActions from '../reducers/app/appActions';
+import { Map } from 'immutable'; 
+
 const { Component, View, Text, StyleSheet, ScrollView } = React;
+
+/**
+ * ## Redux boilerplate
+ */
+const actions = [
+  appActions
+];
+
+function mapStateToProps(state) {
+  return {
+      ...state
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  const creators = Map()
+          .merge(...actions)
+          .filter(value => typeof value === 'function')
+          .toObject();
+
+  return {
+    actions: bindActionCreators(creators, dispatch),
+    dispatch
+  };
+}
+
 class News extends Component {
   // 默认属性
   static defaultProps = {};
@@ -27,13 +59,21 @@ class News extends Component {
   // 自定义方法
   handle() {
   }
+  navBarBackFn(){
+    
+    const { navigator, actions } = this.props;
+    if(navigator){
+      actions.showTabBar();
+      setTimeout(function(){navigator.pop();}, 300);
+    }
+  }
 
   // 渲染
   render() {
+    console.log('newnewnewnewnewnewnew');
     return (
       <View style={styles.container}>
-        <View style={styles.topbar}></View>
-        <NaviBar style={styles.topbar}></NaviBar>
+        <NaviBar  barTintColor="#D32F2F" tintColor="#fff" titleTextColor="#fff" title="行业资讯" backFunc={this.navBarBackFn.bind(this)} ></NaviBar>
         <ScrollableTabView initialPage={1} renderTabBar={() => <CustomTabBar />}>
           <ScrollView tabLabel="热点" style={styles.tabView}>
             <View style={styles.card}>
@@ -95,4 +135,4 @@ var styles = StyleSheet.create({
     shadowRadius: 3,
   },
 });
-export default News;
+export default connect(mapStateToProps, mapDispatchToProps)(News);

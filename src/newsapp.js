@@ -13,11 +13,12 @@ import { Provider } from 'react-redux/native';
 import App from './containers/App';
 import configureStore from './lib/configureStore';
 
-import authInitialState from './reducers/auth/authInitialState';
+//import authInitialState from './reducers/auth/authInitialState';
+import appInitialState from './reducers/app/appInitialState';
 
 let getInitialState = () => {
   const _initState = {
-    auth: new authInitialState
+    app: new appInitialState
   }
   return _initState;
 };
