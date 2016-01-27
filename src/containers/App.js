@@ -68,7 +68,9 @@ class App extends Component {
     //if(this.state.loggedIn){
     component = (<Navigator
       initialRoute={{name: '首页', component: Tabbar}}
-
+      configureScene={() => {
+            return Navigator.SceneConfigs.FadeAndroid;
+          }}
       renderScene={(route, navigator) => {
                   let Component = route.component;
                   if(route.component) {

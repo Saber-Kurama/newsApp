@@ -14,6 +14,7 @@ import Swiper from '../components/ReactNativeSwiper';
 import Grid from '../components/Grid';
 import News from './News';
 import Login from './Login';
+import LeaderBoard from './LeaderBoard';
 import * as appActions from '../reducers/app/appActions';
 const { Component, View, Text, StyleSheet, Image, TouchableOpacity } = React;
 const actions = [
@@ -86,7 +87,7 @@ class Home extends Component {
     return mockData.map(item => {
       return (
         <View>
-          <TouchableOpacity onPress={this.gonews.bind(this)}>
+          <TouchableOpacity onPress={(() => {this.goto(item.route)}).bind(this)}>
           <Image source={item.icon}>
             { item.badge && (<View style={styles.badge}/>) }
           </Image>
@@ -99,19 +100,29 @@ class Home extends Component {
     });
   }
 
-  gonews() {
-    
+  goto(page) {
+    console.log(page);
     const { navigator, actions } = this.props;
     //或者写成 const navigator = this.props.navigator;
     //为什么这里可以取得 props.navigator?请看上文:
     //<Component {...route.params} navigator={navigator} />
     //这里传递了navigator作为props
     if(navigator) {
-      //actions.hideTabBar();
-      navigator.push({
-        name: 'SecondPageComponent',
-        component: News
-      });
+      switch (page){
+        case 'news':
+          navigator.push({
+            name: 'SecondPageComponent',
+            component: News
+          });
+          return ;
+        case 'leaderBoard': 
+          navigator.push({
+            name: 'leaderBoard',
+            component: LeaderBoard
+          });
+          return;
+      }
+      
     }
   }
   // 渲染

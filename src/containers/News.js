@@ -17,7 +17,7 @@ import NaviBar from '../components/NaviBar';
 import * as appActions from '../reducers/app/appActions';
 import { Map } from 'immutable'; 
 
-const { Component, View, Text, StyleSheet, ScrollView } = React;
+const { Component, View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } = React;
 
 /**
  * ## Redux boilerplate
@@ -73,11 +73,17 @@ class News extends Component {
     return (
       <View style={styles.container}>
         <NaviBar  barTintColor="#D32F2F" tintColor="#fff" titleTextColor="#fff" title="行业资讯" backFunc={this.navBarBackFn.bind(this)} ></NaviBar>
-        <ScrollableTabView initialPage={1} renderTabBar={() => <CustomTabBar />}>
+        <ScrollableTabView initialPage={0} renderTabBar={() => <CustomTabBar />}>
           <ScrollView tabLabel="热点" style={styles.tabView}>
-            <View style={styles.card}>
-              <Text>News</Text>
-            </View>
+            <TouchableOpacity >
+              <View style={myStyles.row}>
+                <Image style={myStyles.newsPic} source={{uri: 'http://c.hiphotos.baidu.com/image/w%3D310/sign=0dff10a81c30e924cfa49a307c096e66/7acb0a46f21fbe096194ceb468600c338644ad43.jpg'}} />
+                <View style={myStyles.textContainer}>
+                  <Text style={myStyles.title}>Title</Text>
+                  <Text style={myStyles.subtitle}>1111</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
           </ScrollView>
           <ScrollView tabLabel="娱乐" style={styles.tabView}>
             <View style={styles.card}>
@@ -133,5 +139,39 @@ var styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
   },
+});
+const myStyles = StyleSheet.create({
+  row: {
+    alignItems: 'center',
+    height: 80,
+    //backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(206,206,206,1)',
+    padding: 10,
+    flexDirection: 'row',
+  },
+  textContainer: {
+    paddingLeft: 10,
+    flex: 1,
+  },
+  newsPic: {
+    width: 90,
+    height: 60,
+    margin: 10,
+    marginLeft: 0,
+  },
+  title: {
+    color: '#4f4f4f',
+    fontSize: 14,
+    textAlign: 'left',
+    //marginBottom: 8,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#bababa',
+    fontSize: 12,
+    textAlign: 'left',
+
+  }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(News);
