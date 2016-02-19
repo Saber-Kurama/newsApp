@@ -15,6 +15,7 @@ import Grid from '../components/Grid';
 import News from './News';
 import Login from './Login';
 import LeaderBoard from './LeaderBoard';
+import Performance from './Performance';
 import * as appActions from '../reducers/app/appActions';
 const { Component, View, Text, StyleSheet, Image, TouchableOpacity } = React;
 const actions = [
@@ -121,6 +122,11 @@ class Home extends Component {
             component: LeaderBoard
           });
           return;
+        case 'performance': 
+          navigator.push({
+            name: 'performance',
+            component: Performance
+          })
       }
       
     }

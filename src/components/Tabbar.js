@@ -50,8 +50,8 @@ class Tabbar extends Component {
           <TabNavigator.Item
               selected = {this.state.selectedTab === 'home'}
               title='首页'
-              renderIcon={() => <Icon name="home" size={30} color="#FFB3B3" />}
-              renderSelectedIcon={() => <Icon name="home" size={30} color="#FF3366" />}
+              renderIcon={() => <Icon name="home" size={25} color="#FFB3B3" />}
+              renderSelectedIcon={() => <Icon name="home" size={25} color="#FF3366" />}
               onPress = {() => this.setState({selectedTab: 'home'})} >
             <View style={styles.container}>
               <Home navigator={this.props.navigator}/>
@@ -60,8 +60,8 @@ class Tabbar extends Component {
           <TabNavigator.Item 
               selected = {this.state.selectedTab === 'customer'}
               title='客户'
-              renderIcon={() => <Icon name="users" size={30} color="#ffb3b3" /> }
-              renderSelectedIcon={() => <Icon name="users" size={30} color="#ff3366"/>}
+              renderIcon={() => <Icon name="users" size={25} color="#ffb3b3" /> }
+              renderSelectedIcon={() => <Icon name="users" size={25} color="#ff3366"/>}
               onPress={() => this.setState({selectedTab: 'customer'})}>
             <View style={styles.container}>
               <Phone />
@@ -70,8 +70,8 @@ class Tabbar extends Component {
           <TabNavigator.Item
               selected = {this.state.selectedTab === 'training'}
               title='培训'
-              renderIcon={() => <Icon name="graduation-cap" size={30} color="#ffb3b3" /> }
-              renderSelectedIcon={() => <Icon name="graduation-cap" size={30} color="#ff3366"/>}
+              renderIcon={() => <Icon name="graduation-cap" size={25} color="#ffb3b3" /> }
+              renderSelectedIcon={() => <Icon name="graduation-cap" size={25} color="#ff3366"/>}
               onPress={() => this.setState({selectedTab: 'training'})}>
             <View style={styles.container}>
               <Login />
@@ -80,8 +80,8 @@ class Tabbar extends Component {
           <TabNavigator.Item
               selected = {this.state.selectedTab === 'profile'}
               title='profile'
-              renderIcon={() => <Icon name="gear" size={30} color="#FFB3B3" />}
-              renderSelectedIcon={() => <Icon name="gear" size={30} color="#FF3366" />}
+              renderIcon={() => <Icon name="gear" size={25} color="#FFB3B3" />}
+              renderSelectedIcon={() => <Icon name="gear" size={25} color="#FF3366" />}
               onPress = { () => this.setState({selectedTab: 'profile'}) }>
             <View style={styles.container}>
               <Profile />
